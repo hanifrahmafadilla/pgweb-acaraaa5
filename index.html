@@ -82,6 +82,36 @@
         });
 
 
+         // GeoJSON Polyline Jalan
+        var jalan = L.geoJSON(null, {
+            // Style
+            style: function (feature) {
+                return {
+                    color: "#480607 ",
+                    opacity: 1,
+                    weight: 3,
+                };
+            },
+
+            // onEachFeature
+            onEachFeature: function (feature, layer) {
+                // variable popup content
+                var popup_content = "Fungsi: " + feature.properties.NAMA_UNSUR + "<br>" +
+                    "Panjang (km): " + feature.properties.panjang_km;
+
+                layer.on({
+                    click: function (e) {
+                        jalan.bindPopup(popup_content);
+                    },
+                });
+            },
+        });
+
+        $.getJSON("geoJSON/jalan.geojson", function (data) {
+            jalan.addData(data); // Menambahkan data ke dalam GeoJSON Polyline Jalan
+            map.addLayer(jalan); // Menambahkan GeoJSON Polyline Jalan ke dalam peta
+        });
+
         // GeoJSON Polygon Jumlah Penduduk
         var jumlah_penduduk = L.geoJSON(null, {
             // Style
@@ -141,35 +171,6 @@
             map.addLayer(jumlah_penduduk); // Menambahkan GeoJSON Polygon Jumlah Penduduk ke dalam peta
         });
 
-        // GeoJSON Polyline Jalan
-        var jalan = L.geoJSON(null, {
-            // Style
-            style: function (feature) {
-                return {
-                    color: "#480607 ",
-                    opacity: 1,
-                    weight: 3,
-                };
-            },
-
-            // onEachFeature
-            onEachFeature: function (feature, layer) {
-                // variable popup content
-                var popup_content = "Fungsi: " + feature.properties.NAMA_UNSUR + "<br>" +
-                    "Panjang (km): " + feature.properties.panjang_km;
-
-                layer.on({
-                    click: function (e) {
-                        jalan.bindPopup(popup_content);
-                    },
-                });
-            },
-        });
-
-        $.getJSON("geojson/jalan.geojson", function (data) {
-            jalan.addData(data); // Menambahkan data ke dalam GeoJSON Polyline Jalan
-            map.addLayer(jalan); // Menambahkan GeoJSON Polyline Jalan ke dalam peta
-        });
 
         // Control Layer
         var baseMaps = {
