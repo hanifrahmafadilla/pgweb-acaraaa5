@@ -164,7 +164,7 @@
                         jumlah_penduduk.bindPopup(popup_content);
                     },
                     mouseover: function (e) {
-                        jumlah_penduduk.bindTooltip(feature.properties.WADMKC, {
+                        jumlah_penduduk.bindTooltip(String(feature.properties.Penduduk), {
                             direction: "auto",
                             sticky: true,
                         });
