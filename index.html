@@ -103,6 +103,13 @@
                     click: function (e) {
                         jalan.bindPopup(popup_content);
                     },
+
+                mouseover: function (e) {
+                        jalan.bindTooltip(feature.properties.NAMA_UNSUR, {
+                            direction: "left",
+                            sticky: true,
+                        });
+                    },
                 });
             },
         });
